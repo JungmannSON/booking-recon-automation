@@ -1,0 +1,74 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "booking-recon-automation"
+version = "0.1.0"
+description = "AI-powered booking reconciliation with deterministic execution"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [
+    {name = "JungmannSON", email = "dev@example.com"}
+]
+keywords = ["booking", "reconciliation", "llm", "automation", "dag", "orchestration"]
+
+dependencies = [
+    "pydantic>=2.0.0",
+    "pydantic-settings>=2.0.0",
+    "jsonschema>=4.19.0",
+    "python-dateutil>=2.8.2",
+    "pytz>=2023.3",
+    "openai>=1.0.0",
+    "anthropic>=0.7.0",
+    "httpx>=0.24.0",
+    "aiofiles>=23.0.0",
+    "sqlalchemy>=2.0.0",
+    "alembic>=1.12.0",
+    "pydantic-core>=2.0.0",
+    "typing-extensions>=4.8.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4.0",
+    "pytest-asyncio>=0.21.0",
+    "pytest-cov>=4.1.0",
+    "black>=23.0.0",
+    "isort>=5.12.0",
+    "flake8>=6.0.0",
+    "mypy>=1.5.0",
+    "pre-commit>=3.4.0",
+]
+
+storage = [
+    "psycopg2-binary>=2.9.0",
+    "sqlite3",
+]
+
+llm = [
+    "openai>=1.0.0",
+    "anthropic>=0.7.0",
+]
+
+[tool.setuptools]
+packages = ["planner", "compiler", "orchestrator", "workers", "policies", "events", "storage"]
+
+[tool.black]
+line-length = 100
+target-version = ["py310"]
+
+[tool.isort]
+profile = "black"
+line_length = 100
+
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
